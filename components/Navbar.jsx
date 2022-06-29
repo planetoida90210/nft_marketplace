@@ -10,6 +10,7 @@ import images from '../assets/assets';
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
 
+  console.log({ theme });
   return (
     <nav className="flexBetween w-full fixed z-10 p-4 flex-row border-b dark:bg-nft-dark bg-white dark:border-nft-black-1 border-nft-gray-1">
       <div className="flex flex-1 flex-row justify-start">
@@ -31,7 +32,7 @@ const Navbar = () => {
             type="checkbox"
             className="checkbox"
             id="checkbox"
-            onChange={() => {}}
+            onChange={() => setTheme(theme === 'light' ? 'dark' : 'light')}
           />
           <label htmlFor="checkbox" className="flexBetween w-8 h-4 bg-black rounded-2xl p-1 relative label">
             <i className="fas fa-sun" />
