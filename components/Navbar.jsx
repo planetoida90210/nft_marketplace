@@ -29,17 +29,27 @@ const MenuItems = ({ isMobile, active, setActive }) => {
   );
 };
 
-const ButtonGroup = () => {
+const ButtonGroup = ({ setActive, router }) => {
   const hasConnected = false;
 
   return hasConnected ? (
-    <Button btnName="Create" classStyles="mx-2 rounded-xl" />
-  ) : (<Button btnName="Connect" classStyles="mx-2 rounded-xl" />);
+    <Button
+      btnName="Create"
+      classStyles="mx-2 rounded-xl"
+      handleClick={() => {
+        setActive('');
+
+        router.push('/create-nft');
+      }}
+    />
+  ) : (<Button btnName="Connect" classStyles="mx-2 rounded-xl" handleClick={() => {}} />);
 };
 
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
   const [active, setActive] = useState('Explore NFTs');
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="flexBetween w-full fixed z-10 p-4 flex-row border-b dark:bg-nft-dark bg-white dark:border-nft-black-1 border-nft-gray-1">
@@ -56,6 +66,8 @@ const Navbar = () => {
           </div>
         </Link>
       </div>
+
+      {/* large devices */}
       <div className="flex flex-initial flex-row justify-end">
         <div className="flex items-center mr-2">
           <input
@@ -70,11 +82,19 @@ const Navbar = () => {
             <div className="w-3 h-3 absolute bg-white rounded-full ball" />
           </label>
         </div>
-      </div>
-      <div className="md:hidden flex">
-        <MenuItems active={active} setActive={setActive} />
-        <div className="ml-4">
-          <ButtonGroup />
+        <div className="md:hidden flex">
+          <MenuItems active={active} setActive={setActive} />
+          <div className="ml-4">
+            <ButtonGroup setActive={setActive} router={router} />
+          </div>
+        </div>
+        {/* mobile navigation bar */}
+        <div className="hidden md:flex ml-2">
+          {isOpen ? (
+            <Image src={images.cross} />
+          ) : (
+            <Image src={images.menu} objectFit="contain" width={25} height={25} alt="menu" onClick={() => setIsOpen(true)} className={theme === 'light' && 'filter invert'} />
+          )}
         </div>
       </div>
     </nav>
