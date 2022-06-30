@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 // external imports
 import images from '../assets/assets';
+import { Button } from '.';
 
 const MenuItems = ({ isMobile, active, setActive }) => {
   const generateLink = (i) => {
@@ -26,6 +27,14 @@ const MenuItems = ({ isMobile, active, setActive }) => {
       ))}
     </ul>
   );
+};
+
+const ButtonGroup = () => {
+  const hasConnected = false;
+
+  return hasConnected ? (
+    <Button btnName="Create" classStyles="mx-2 rounded-xl" />
+  ) : (<Button btnName="Connect" classStyles="mx-2 rounded-xl" />);
 };
 
 const Navbar = () => {
@@ -63,9 +72,10 @@ const Navbar = () => {
         </div>
       </div>
       <div className="md:hidden flex">
-        <ul className="list-none flexCenter flex-row">
-          <MenuItems active={active} setActive={setActive} />
-        </ul>
+        <MenuItems active={active} setActive={setActive} />
+        <div className="ml-4">
+          <ButtonGroup />
+        </div>
       </div>
     </nav>
   );
