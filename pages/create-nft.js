@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
-import { Button } from '../components';
+import { Button, Input } from '../components';
 import images from '../assets/assets';
 
 const CeateNFT = () => {
@@ -54,6 +54,24 @@ const CeateNFT = () => {
             )}
           </div>
         </div>
+        <Input
+          inputType="input"
+          title="Name"
+          placeholder="NFT Name"
+          handleClick={() => {}}
+        />
+        <Input
+          inputType="textarea"
+          title="Description"
+          placeholder="NFT Description"
+          handleClick={() => {}}
+        />
+        <Input
+          inputType="number"
+          title="Price"
+          placeholder="NFT Price"
+          handleClick={() => {}}
+        />
       </div>
     </div>
   );
