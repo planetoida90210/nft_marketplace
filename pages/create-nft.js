@@ -9,6 +9,7 @@ import images from '../assets/assets';
 
 const CeateNFT = () => {
   const [fileUrl, setFileUrl] = useState(null);
+  const [formInput, setFormInput] = useState({ price: '', name: '', description: '' });
   const { theme } = useTheme();
 
   const onDrop = useCallback(() => {
@@ -27,6 +28,7 @@ const CeateNFT = () => {
     ${isDragAccept && ' border-file-accept'}
     ${isDragReject && ' border-file-reject'}`
   ), [isDragActive, isDragAccept, isDragReject]);
+
   return (
     <div className="flex justify-center sm:px-4 p-12">
       <div className="w-3/5 md:w-full">
@@ -58,20 +60,23 @@ const CeateNFT = () => {
           inputType="input"
           title="Name"
           placeholder="NFT Name"
-          handleClick={() => {}}
+          handleClick={(e) => setFormInput({ ...formInput, name: e.target.value })}
         />
         <Input
           inputType="textarea"
           title="Description"
           placeholder="NFT Description"
-          handleClick={() => {}}
+          handleClick={(e) => setFormInput({ ...formInput, description: e.target.value })}
         />
         <Input
           inputType="number"
           title="Price"
           placeholder="NFT Price"
-          handleClick={() => {}}
+          handleClick={(e) => setFormInput({ ...formInput, price: e.target.value })}
         />
+        <div className="mt-7 w-full flex justify-end">
+          <Button btnName="Create NFT" classStyles="rounded-xl" handleClick={() => {}} />
+        </div>
       </div>
     </div>
   );
