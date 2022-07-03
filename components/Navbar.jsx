@@ -30,7 +30,7 @@ const MenuItems = ({ isMobile, active, setActive }) => {
 };
 
 const ButtonGroup = ({ setActive, router }) => {
-  const hasConnected = false;
+  const hasConnected = true;
 
   return hasConnected ? (
     <Button
