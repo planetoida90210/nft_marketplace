@@ -7,6 +7,7 @@ import Link from 'next/link';
 // external imports
 import images from '../assets/assets';
 import { Button } from '.';
+import { NFTContext } from '../context/NFTContext';
 
 const MenuItems = ({ isMobile, active, setActive }) => {
   const generateLink = (i) => {
@@ -19,7 +20,7 @@ const MenuItems = ({ isMobile, active, setActive }) => {
   };
 
   return (
-    <ul className={`list-none flexCenter flex-row ${isMobile && 'flex-col h-full'}`}>
+    <ul className={`list-none flexCenter flex-row ${isMobile ? 'flex-col h-full' : ''}`}>
       {['Explore NFTs', 'Listed NFTs', 'My NFTs'].map((item, i) => (
         <li key={i} onClick={() => { setActive(item); }} className={`flex flex-row items-center font-poppins font-semibold text-base dark:hover:text-white hover:text-nft-dark mx-3 ${active === item ? 'dark:text-white text-nft-black-1' : 'dark:text-nft-gray-3 text-nft-gray-2'}`}>
           <Link href={generateLink(i)}>{item}</Link>
@@ -30,9 +31,9 @@ const MenuItems = ({ isMobile, active, setActive }) => {
 };
 
 const ButtonGroup = ({ setActive, router }) => {
-  const hasConnected = true;
+  const { connectWallet, currentAccount } = useContext(NFTContext);
 
-  return hasConnected ? (
+  return currentAccount ? (
     <Button
       btnName="Create"
       classStyles="mx-2 rounded-xl"
@@ -42,7 +43,7 @@ const ButtonGroup = ({ setActive, router }) => {
         router.push('/create-nft');
       }}
     />
-  ) : (<Button btnName="Connect" classStyles="mx-2 rounded-xl" handleClick={() => {}} />);
+  ) : (<Button btnName="Connect" classStyles="mx-2 rounded-xl" handleClick={connectWallet} />);
 };
 
 const Navbar = () => {
@@ -91,9 +92,9 @@ const Navbar = () => {
         {/* mobile navigation bar */}
         <div className="hidden md:flex ml-2">
           {isOpen ? (
-            <Image src={images.cross} objectFit="contain" width={20} height={20} alt="close" onClick={() => setIsOpen(false)} className={theme === 'light' && 'filter invert'} />
+            <Image src={images.cross} objectFit="contain" width={20} height={20} alt="close" onClick={() => setIsOpen(false)} className={theme === 'light' ? 'filter invert' : ''} />
           ) : (
-            <Image src={images.menu} objectFit="contain" width={25} height={25} alt="menu" onClick={() => setIsOpen(true)} className={theme === 'light' && 'filter invert'} />
+            <Image src={images.menu} objectFit="contain" width={25} height={25} alt="menu" onClick={() => setIsOpen(true)} className={theme === 'light' ? 'filter invert' : ''} />
           )}
 
           {isOpen && (
