@@ -6,7 +6,7 @@ import { create as ipfsHttpClient } from 'ipfs-http-client';
 
 import { MarketAddress, MarketAddressABI } from './constans';
 
-const client = ipfsHttpClient('https://ipfs.inura.io:5001/api/v0');
+const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
 
 export const NFTContext = React.createContext();
 
