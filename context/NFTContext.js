@@ -59,7 +59,7 @@ export const NFTProvider = ({ children }) => {
 
     if (!name || !description || !price || !fileUrl) return;
 
-    const data = JSON.stringify({ name, description, imae: fileUrl });
+    const data = JSON.stringify({ name, description, image: fileUrl });
 
     try {
       const added = await client.add(data);
@@ -98,7 +98,7 @@ export const NFTProvider = ({ children }) => {
     const items = await Promise.all(data.map(async ({ tokenId, seller, owner, price: unformattedPrice }) => {
       const tokenURI = await contract.tokenURI(tokenId);
       const { data: { image, name, description } } = await axios.get(tokenURI);
-      const price = ethers.utils.parseUnits(unformattedPrice.toString(), 'ether');
+      const price = ethers.utils.formatUnits(unformattedPrice.toString(), 'ether');
 
       return {
         price,
