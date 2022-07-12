@@ -17,6 +17,14 @@ const NFTDetails = () => {
     if (!router.isReady) return;
   }, [router.isReady]);
 
+  if (isLoading) {
+    return (
+      <div className="flex-start min-h-screen">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div className="relative flex justify-center md:flex-col min-h-screen">
       <div className="relative flex-1 flexCenter sm:px-4 p-12 border-r md:border-r-0 md:border-b dark:border-nft-black-1 border-nft-gray-1">
