@@ -10,11 +10,14 @@ import { shortenAddress } from '../utils/shortenAddress';
 const NFTDetails = () => {
   const { currentAccount } = useContext(NFTContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [nft, setNft] = useState({});
+  const [nft, setNft] = useState({ image: '', tokenId: '', name: '', owner: '', price: '', seller: '' });
   const router = useRouter();
 
   useEffect(() => {
     if (!router.isReady) return;
+
+    setNft(router.query);
+    setIsLoading(false);
   }, [router.isReady]);
 
   if (isLoading) {
