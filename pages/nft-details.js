@@ -38,6 +38,7 @@ const NFTDetails = () => {
   const { currentAccount, nftCurrency } = useContext(NFTContext);
   const [isLoading, setIsLoading] = useState(true);
   const [nft, setNft] = useState({ image: '', tokenId: '', name: '', owner: '', price: '', seller: '' });
+  const [paymentModal, setPaymentModal] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -90,12 +91,23 @@ const NFTDetails = () => {
                 You cannot buy your own NFT
               </p>
             ) : (
-              <Button btnName={`Buy for ${nft.price} ${nftCurrency}`} classStyles="mr-5 sm:mr-0 rounded-xl" />
+              <Button btnName={`Buy for ${nft.price} ${nftCurrency}`} classStyles="mr-5 sm:mr-0 rounded-xl" handleClick={() => setPaymentModal(true)} />
             )}
         </div>
       </div>
-
-      <Modal header="Check Out" body={<PaymentBodyCmp nft={nft} nftCurrency={nftCurrency} />} footer={(<div>Custom Footer</div>)} handleClick={() => {}} />
+      {paymentModal && (
+        <Modal
+          header="Check Out"
+          body={<PaymentBodyCmp nft={nft} nftCurrency={nftCurrency} />}
+          footer={(
+            <div className="flex flex-row sm:flex-col">
+              <Button btnName="Checkout" classStyles="mr-5 sm:mr-0 rounded-xl" handleClick={() => {}} />
+              <Button btnName="Cancel" classStyles="rounded-xl" handleClick={() => setPaymentModal(false)} />
+            </div>
+)}
+          handleClose={() => setPaymentModal(false)}
+        />
+      ) }
     </div>
   );
 };
