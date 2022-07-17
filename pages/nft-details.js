@@ -3,12 +3,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { NFTContext } from '../context/NFTContext';
-import { Loader, NFTCard, Button } from '../components';
+import { Loader, NFTCard, Button, Modal } from '../components';
 import images from '../assets/assets';
 import { shortenAddress } from '../utils/shortenAddress';
 
 const NFTDetails = () => {
-  const { currentAccount } = useContext(NFTContext);
+  const { currentAccount, nftCurrency } = useContext(NFTContext);
   const [isLoading, setIsLoading] = useState(true);
   const [nft, setNft] = useState({ image: '', tokenId: '', name: '', owner: '', price: '', seller: '' });
   const router = useRouter();
@@ -63,10 +63,12 @@ const NFTDetails = () => {
                 You cannot buy your own NFT
               </p>
             ) : (
-              <Button btnName={`Buy for ${nft.pice} ${nft.currency}`} classStyles="mr-5 sm:mr-0 rounded-xl" />
+              <Button btnName={`Buy for ${nft.price} ${nftCurrency}`} classStyles="mr-5 sm:mr-0 rounded-xl" />
             )}
         </div>
       </div>
+
+      <Modal />
     </div>
   );
 };
