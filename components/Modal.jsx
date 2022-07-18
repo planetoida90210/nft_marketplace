@@ -7,8 +7,15 @@ import images from '../assets/assets';
 const Modal = ({ header, body, footer, handleClose }) => {
   const modalRef = useRef(null);
   const { theme } = useTheme();
+
+  const handleClickOutside = (e) => {
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
+      handleClose();
+    }
+  };
+
   return (
-    <div className="flexCenter fixed inset-0 z-10 bg-overlay-black animated fadeIn">
+    <div className="flexCenter fixed inset-0 z-10 bg-overlay-black animated fadeIn" onClick={handleClickOutside}>
       <div ref={modalRef} className="w-2/5 md:w-11/12 minlg:w-2/4 dark:bg-nft-dark bg-white flex flex-col rounded-lg">
         <div className="flex justify-end mt-4 mr-4 minlg:mt-6 minlg:mr-6">
           <div className="relative w-3 h-3 minlg:w-6 minlg:h-6 cursor-pointer" onClick={handleClose}>
