@@ -116,7 +116,8 @@ const NFTDetails = () => {
           handleClose={() => setPaymentModal(false)}
         />
       ) }
-
+      {successModal
+      && (
       <Modal
         header="Payment Successful"
         body={(
@@ -134,6 +135,7 @@ const NFTDetails = () => {
 )}
         handleClose={() => setPaymentModal(false)}
       />
+      )};
     </div>
   );
 };

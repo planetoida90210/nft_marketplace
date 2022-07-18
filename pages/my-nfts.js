@@ -8,9 +8,17 @@ import images from '../assets/assets';
 import { shortenAddress } from '../utils/shortenAddress';
 
 const MyNFTs = () => {
-  const { setMyNFTsOrListedNFTs, currentAccount } = useContext(NFTContext);
+  const { fetchMyNFTsOrListedNFTs, currentAccount } = useContext(NFTContext);
   const [nfts, setNfts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    fetchMyNFTsOrListedNFTs()
+      .then((items) => {
+        setNfts(items);
+        setIsLoading(false);
+      });
+  }, []);
 
   if (isLoading) {
     return (
