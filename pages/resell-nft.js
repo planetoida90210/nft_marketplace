@@ -52,7 +52,7 @@ const ResellNFT = () => {
         {image && <img src={image} className="rounded mt-4" width={350} />}
         <div className="mt-7 w-full flex justify-end">
           <Button
-            btnName="List NFT"
+            btnName="Resell NFT"
             classStyles="rounded-xl"
             handleClick={resell}
           />
