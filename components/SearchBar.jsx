@@ -16,7 +16,7 @@ const SearchBar = ({ activeSelect, setActiveSelect, handleSearch }) => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [debouncedSearch]);
 
   useEffect(() => {
     if (search) {
@@ -24,7 +24,7 @@ const SearchBar = ({ activeSelect, setActiveSelect, handleSearch }) => {
     } else {
       // clear search
     }
-  }, []);
+  }, [search]);
   console.log(search);
   return (
     <>
