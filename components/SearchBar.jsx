@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes';
 
 import images from '../assets/assets';
 
-const SearchBar = ({ activeSelect, setActiveSelect, handleSearch }) => {
+const SearchBar = ({ activeSelect, setActiveSelect, clearSearch, handleSearch }) => {
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState(search);
   const [toggle, setToggle] = useState('');
@@ -22,7 +22,7 @@ const SearchBar = ({ activeSelect, setActiveSelect, handleSearch }) => {
     if (search) {
       handleSearch(search);
     } else {
-      // clear search
+      clearSearch();
     }
   }, [search]);
   console.log(search);
@@ -43,7 +43,11 @@ const SearchBar = ({ activeSelect, setActiveSelect, handleSearch }) => {
         {toggle && (
         <div className="absolute top-full left-0 right-0 w-full mt-3 z-10 dark:bg-nft-black-2 bg-white border dark:border-nft-black-2 border-nft-gray-2 py-3 px-4 rounded-md">
           {['Recently added', 'Price (low to high)', 'Price (high to low)'].map((item) => (
-            <p className="font-poppins dark:text-white text-nft-black-1 font-normal text-xs my-3 cursor-pointer">
+            <p
+              className="font-poppins dark:text-white text-nft-black-1 font-normal text-xs my-3 cursor-pointer"
+              onClick={() => setActiveSelect(item)}
+              key={item}
+            >
               {item}
             </p>
           ))}
