@@ -72,6 +72,10 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    setTheme('dark');
+  }, []);
+
+  useEffect(() => {
     checkActive(active, setActive, router);
   }, [router.pathname]);
 
